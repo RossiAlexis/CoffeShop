@@ -24,13 +24,18 @@ const Router = {
     let pageElement = null;
     switch (route) {
       case "/":
-        pageElement = document.createElement("h1");
+        pageElement = document.createElement("menu-page");
         pageElement.textContent = "Main Menu";
         break;
       case "/order":
-        pageElement = document.createElement("h1");
-        pageElement.textContent = "Your order";
+        pageElement = document.createElement("order-page");
         break;
+      default:
+        if (route.startsWith("/product-")) {
+          pageElement = document.createElement("details-page");
+          const paramID = route.substring(route.lastIndexOf("-") + 1);
+          pageElement.dataset.id = paramID;
+        }
     }
     if (pageElement) {
       const main = document.querySelector("main");
